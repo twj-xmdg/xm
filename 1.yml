@@ -1,0 +1,58 @@
+# 数据集相关配置
+# 训练集图像路径
+train: D:/作业/传感器/压缩包/老师/a2c41-main/a2c41-main/fatigue_datasets/train/images
+# 验证集图像路径
+val: D:/作业/传感器/压缩包/老师/a2c41-main/a2c41-main/fatigue_datasets/val/images
+# 类别数量
+nc: 4
+# 类别名称（与疲劳驾驶4类对应，键为字符串格式）
+names:
+  "0": closed_eye
+  "1": closed_mouth
+  "2": open_eye
+  "3": open_mouth
+#
+# 模型相关配置（适配疲劳驾驶检测模型）
+MODEL:
+  WEIGHT: "D:/作业/传感器/汇报ppt/ultralytics-main/ultralytics-main/runs/detect/fatigue_train2/weights/best.pt"  # 你的疲劳驾驶模型权重路径
+  DEVICE: "0"  # 运行设备（0=GPU，"cpu"=CPU，适配你的RTX 4060）
+  CONF: 0.25  # 置信度阈值（可根据检测效果调整）
+  CLASSES: "[0, 1, 2, 3]"  # 检测类别列表（疲劳驾驶4类全选）
+  IMGSIZE: 640  # 模型输入图像尺寸（与训练时保持一致）
+  iou_threshold: 0.45  # 交并比阈值（用于NMS非极大值抑制）
+
+# 界面相关配置（适配疲劳驾驶检测系统界面）
+UI:
+  background: "./icon/czy_background.png"   # 背景图片路径（若无则改为 ""）
+  image2: "./icon/YuanShen.png"   # 主图路径（可根据实际替换为疲劳驾驶相关图标）
+  title: "疲劳驾驶检测系统"  # 窗口标题（替换为疲劳驾驶主题）
+  label_title: "疲劳驾驶检测系统"  # 界面标题文本
+  start_button_bg: "93,98,194"   # 开始检测按钮背景颜色（RGB格式）
+  start_button_font: "255, 255, 255"   # 开始检测按钮字体颜色（白色）
+  export_button_bg: "93,98,194" # 导出检测结果按钮背景颜色
+  export_button_font: "255, 255, 255" # 导出按钮字体颜色
+  padvalue: [85,95,114]   # 图片填充颜色（RGB格式，替换原单数值）
+  column_widths: [50, 220, 120, 200, 80, 80, 140] # 检测结果表格列宽（适配多列数据展示）
+  column_color: [0, 0, 0]  # 表格字体颜色（黑色，RGB格式）
+  label_info_txt: ""  # 信息标签文本（可留空或填写检测说明）
+  label_info_color: "0, 0, 0"  # 信息标签字体颜色（黑色）
+  label_control_color: "122, 135, 154, 100"   # 左侧控制区域颜色（RGBA格式，带透明度）
+  label_img_color: "122, 135, 154, 150"   # 主图显示区域颜色（RGBA格式）
+  # 表格控件样式配置
+  table_widget_info_styles:
+    header_background_color: "93,98,194" # 表格表头背景颜色（蓝色系）
+    header_color: "white" # 表格表头字体颜色（白色）
+    background_color: "255, 255, 255" # 表格背景颜色（白色）
+    item_hover_background_color: "152,155,232"    # 表格项悬停背景颜色（浅蓝）
+
+# 系统通用配置
+CONFIG:
+  camera_num: 0 # 摄像头ID（0为默认摄像头，用于实时检测）
+  # 疲劳驾驶类别中文映射（替换原缺陷类别，与names字段对应）
+  chinese_name: {
+    'closed_eye': '闭眼',
+    'closed_mouth': '闭嘴',
+    'open_eye': '睁眼',
+    'open_mouth': '张嘴',
+    '无目标': '无目标'
+  }
